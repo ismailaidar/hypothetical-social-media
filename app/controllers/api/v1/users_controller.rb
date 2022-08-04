@@ -1,7 +1,8 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_request, only: [:create]
   before_action :set_user, only: [:show, :destry]
-
+  wrap_parameters :user, include: [:username, :email, :password, :password_confirmation]
+  
   def index
     @users = User.all
     render json: @users, status: :ok
@@ -32,7 +33,8 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.permit(:username, :email, :password)
+    user_params = params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    user_params
   end
 
   def set_user
