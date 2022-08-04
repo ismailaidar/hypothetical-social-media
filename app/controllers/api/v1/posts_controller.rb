@@ -5,12 +5,12 @@ class Api::V1::PostsController < ApplicationController
   def index
     @posts = Post.all
 
-    render json: @posts
+    render json: ::PostsRepresenter.new(@posts).as_json
   end
 
   # GET /posts/1
   def show
-    render json: @post
+    render json: ::PostRepresenter.new(@post).as_json
   end
 
   # POST /posts

@@ -5,7 +5,7 @@ class Api::V1::CommentsController < ApplicationController
   def index
     @comments = Comment.all
 
-    render json: @comments
+    render json: ::CommentsRepresenter.new(@comments).as_json
   end
 
   # GET /comments/1
