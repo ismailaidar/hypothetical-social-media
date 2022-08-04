@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         resources :comments
       end
       resources :ratings
+      get 'timeline', to: 'timeline#index'
     end
   end
 end
