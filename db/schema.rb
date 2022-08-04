@@ -31,8 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_201332) do
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "rater_id", null: false
+    t.integer "user_id"
+    t.integer "rater_id"
     t.integer "stars", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,6 +52,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_201332) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "ratings", "raters"
-  add_foreign_key "ratings", "users"
 end

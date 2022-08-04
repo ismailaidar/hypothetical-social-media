@@ -1,4 +1,4 @@
-class RatingsController < ApplicationController
+class Api::V1::RatingsController < ApplicationController
   before_action :set_rating, only: %i[ show update destroy ]
 
   # GET /ratings
@@ -16,9 +16,10 @@ class RatingsController < ApplicationController
   # POST /ratings
   def create
     @rating = Rating.new(rating_params)
-
+    @rating.rater = @current_user
+    
     if @rating.save
-      render json: @rating, status: :created, location: @rating
+      render json: @rating, status: :created
     else
       render json: @rating.errors, status: :unprocessable_entity
     end
@@ -46,6 +47,7 @@ class RatingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rating_params
-      params.require(:rating).permit(:user_id, :rater_id, :stars)
+      # rater is the ccurrent user
+      params.require(:rating).permit(:user_id, :stars)
     end
 end
