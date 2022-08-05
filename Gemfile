@@ -12,6 +12,8 @@ gem "sqlite3", "~> 1.4"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
+gem "octokit", "~> 4.0"
+
 gem 'jwt'
 
 gem 'will_paginate', '~> 3.3'
