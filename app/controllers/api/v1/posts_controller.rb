@@ -3,7 +3,7 @@ class Api::V1::PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = Post.paginate(:page => params[:page])
 
     render json: ::PostsRepresenter.new(@posts).as_json
   end
