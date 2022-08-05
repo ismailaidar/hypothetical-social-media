@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_request, only: [:create]
   before_action :set_user, only: [:show, :destry]
-  wrap_parameters :user, include: [:username, :email, :password, :password_confirmation]
+  wrap_parameters :user, include: [:name, :username, :email, :password, :link_github]
   
   def index
     @users = User.all
@@ -33,12 +33,11 @@ class Api::V1::UsersController < ApplicationController
 
   private
   def user_params
-    user_params = params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    user_params = params.require(:user).permit(:name, :username, :email, :password, :link_github)
     user_params
   end
 
   def set_user
     @user = User.find(params[:id])
   end
-  
 end
