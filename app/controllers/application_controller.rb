@@ -13,8 +13,8 @@ class ApplicationController < ActionController::API
     @current_user = User.find(decoded[:user_id])
   end
 
-  def record_not_found
-    render json: { message: "Record not found" }, status: :not_found
+  def record_not_found(e)
+    render json: { message: e }, status: :not_found
   end
 
   def record_not_destroyed
